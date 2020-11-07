@@ -1,34 +1,35 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     
-     return queryInterface.createTable('addresses', { 
+     await queryInterface.createTable('endereco', { 
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,
           allowNull: false,
         },
-        user_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: { model: 'users', key: 'id'},
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
-        },
-        zipcode: {
+        rua: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        street: {
+        bairro: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        number: {
-          type: Sequelize.INTEGER,
+        cidade: {
+          type: Sequelize.STRING,
           allowNull: false,
         },
+        coordenadaX: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        }, 
+        coordenadaY: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },        
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
@@ -41,7 +42,7 @@ module.exports = {
      
   },
 
-  down:  (queryInterface, Sequelize) => {
-      queryInterface.dropTable('addresses');
+  down: async (queryInterface, Sequelize) => {
+     await queryInterface.dropTable('endereco');
   }
 };

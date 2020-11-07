@@ -3,7 +3,7 @@ module.exports = {
     host: '10.0.0.105',
     username: 'postgres',
     password: 'syncode123',
-    database: 'sqlnode',
+    database: 'easy',
     define: {
         timestamps: true,
         underscored: true,
