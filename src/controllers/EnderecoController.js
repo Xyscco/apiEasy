@@ -3,33 +3,33 @@ const Cliente = require("../models/Cliente");
 
 module.exports = {
     async index(req, res) {
+        
         const { cliente_id } = req.params;
 
-        const user = await User.findByPk(cliente_id, {
+        const cliente = await Cliente.findByPk(cliente_id, {
             include: { 
                 association: 'clientes', 
-                attributes: ['name'],
                 through: { 
-                    attributes: ['user_id']
+                    attributes: ['cliente_id']
                 }
             }
         })
 
-        return res.json(user.techs);
+        return res.json(cliente.enderecos);
     },
     
     async store(req, res) {
         const { cliente_id } = req.params;
-        const { rua, bairro, cidade, coordenadaX, coordenadaY } = req.body;
+        const { rua, bairro, cidade, coordenada_x, coordenada_y } = req.body;
 
-        const cliente = await User.findByPk(cliente_id);
+        const cliente = await Cliente.findByPk(cliente_id);
 
         if(!cliente) {
             return res.status(400).json({ error: 'Cliente não encontrado' });
         }
 
-        const [ endereco ] = await Tech.create({
-            rua, bairro, cidade, coordenadaX, coordenadaY 
+        const endereco = await Endereco.create({
+            rua, bairro, cidade, coordenada_x, coordenada_y  
         });
 
         await cliente.addEndereco(endereco);

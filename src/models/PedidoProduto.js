@@ -1,13 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Produto extends Model {
+class PedidoProdutos extends Model {
     static init(sequelize) {
         super.init({
-            descricaoProduto: DataTypes.STRING,
-            peso: DataTypes.DOUBLE
+            idPedido: DataTypes.INTEGER,
+            idProduto: DataTypes.INTEGER,
+            quantidade: DataTypes.INTEGER,
+            pesoTotal: DataTypes.DOUBLE
         }, {
-            sequelize,
-            tableName: 'produto'
+            sequelize
         })
     }
 
@@ -17,4 +18,4 @@ class Produto extends Model {
     }
 }
 
-module.exports = Produto;
+module.exports = PedidoProdutos;

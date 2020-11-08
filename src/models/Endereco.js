@@ -6,10 +6,11 @@ class Endereco extends Model {
             rua: DataTypes.STRING,
             bairro: DataTypes.STRING,
             cidade: DataTypes.STRING,
-            coordenadaX: DataTypes.STRING,
-            coordenadaY: DataTypes.STRING,
+            coordenada_x: DataTypes.STRING,
+            coordenada_y: DataTypes.STRING,
         }, {
-            sequelize
+            sequelize,
+            tableName: 'endereco'
         })
     }
 

@@ -22,11 +22,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        coordenadaX: {
+        coordenada_x: {
           type: Sequelize.STRING,
           allowNull: false,
         }, 
-        coordenadaY: {
+        coordenada_y: {
           type: Sequelize.STRING,
           allowNull: false,
         },        

@@ -1,34 +1,30 @@
-const Address = require("../models/Address");
-const User = require("../models/User");
+const Produto = require("../models/Produto");
 
 module.exports = {
     async index(req, res) {
         
-        const { user_id } = req.params;
+        const { produto_id } = req.params;
 
-        const user = await User.findByPk(user_id, {
-            include: { association: 'addresses' }
+        const produto = await Produto.findByPk(produto_id, {
+            // include: { association: 'addresses' }
         }); 
 
-        return res.json(user);
+        return res.json(produto);
     },
     
     async store(req, res) {
-        const { user_id } = req.params;
-        const { zipcode, street, number } = req.body;
+        
+        const { descricaoProduto, peso } = req.body;
 
-        const user = await User.findByPk(user_id);
+        var produtoFind = await Produto.findOne({ where: { descricaoProduto: descricaoProduto } });
 
-        if(!user)
-            return res.status(400).json({ error: "Usuário não encontrado "});
+        if(produtoFind)
+            return res.status(400).json({ error: `Já existe um produto com o nome: ${descricaoProduto}`});
 
-        const address = await Address.create({ 
-            zipcode, 
-            user_id, 
-            street, 
-            number 
+        const produtoCriado = await Produto.create({ 
+            descricaoProduto, peso 
         });
 
-        return res.json(address);
+        return res.json(produtoCriado);
     }
 }
