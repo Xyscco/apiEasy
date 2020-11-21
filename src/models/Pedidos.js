@@ -3,8 +3,8 @@ const { Model, DataTypes } = require('sequelize');
 class Pedidos extends Model {
     static init(sequelize) {
         super.init({
-            idCliente: DataTypes.INTEGER,
-            idEndereco: DataTypes.INTEGER,
+            id_cliente: DataTypes.INTEGER,
+            id_endereco: DataTypes.INTEGER,
             status: DataTypes.INTEGER,
             observacao: DataTypes.STRING
         }, {
@@ -14,7 +14,8 @@ class Pedidos extends Model {
 
     static associate(models) {
         // this.hasMany(models.Endereco, { foreignKey: 'cliente_id', as: 'endereco' });
-        // this.belongsToMany(models.Endereco, { foreignKey: 'cliente_id', through: 'cliente_endereco', as: 'enderecos' })
+        this.belongsToMany(models.Produto, { foreignKey: 'id_pedido', through: 'pedido_produtos', as: 'produtos' })
+        this.hasMany(models.Entregas, { foreignKey: 'id_pedido', through: 'entrega_pedidos', as: 'entregas' })
     }
 }
 

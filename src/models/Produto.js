@@ -13,7 +13,7 @@ class Produto extends Model {
 
     static associate(models) {
         // this.hasMany(models.Endereco, { foreignKey: 'cliente_id', as: 'endereco' });
-        // this.belongsToMany(models.Endereco, { foreignKey: 'cliente_id', through: 'cliente_endereco', as: 'enderecos' })
+        this.belongsToMany(models.Pedidos, { foreignKey: 'id_produto', through: 'pedido_produtos', as: 'pedidos' })
     }
 }
 

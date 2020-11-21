@@ -3,13 +3,26 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('pedido_produtos', { 
+      
       id_pedido: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        references: {
+          model: 'Pedidos',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull: false
       },
       id_produto: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        references: {
+          model: 'Produto',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull: false
       },
       quantidade: {
         type: Sequelize.INTEGER,
